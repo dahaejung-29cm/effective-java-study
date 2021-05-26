@@ -13,7 +13,9 @@ class BasicSingletonTest extends Specification {
         def BasicSingleton2= BasicSingleton.getInstance();
         BasicSingleton2.setValue(222)
 
+        EnumSet
         // 테스트 결과 검증
+
         then:
         BasicSingleton == BasicSingleton2
         BasicSingleton.getValue() == BasicSingleton2.getValue()
