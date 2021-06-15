@@ -8,12 +8,11 @@ import java.util.concurrent.ThreadLocalRandom;
 public class VargClass {
 
     public static void main(String[] args) {
-
-
-        //danferous(List.of("A", "B", "C"));
+                //danferous(List.of("A", "B", "C"));
         //String[] attributes = pickTwo("A", "B", "C");
         List<String> good = goodPickTwo("A", "B", "C");
-        //String[] attributes2 = (String[]) pickTwo("A", "B", "C");
+        String[] good2 = pickFour("A", "B", "C");
+        String[] attributes2 = (String[]) pickTwo("A", "B", "C");
         //Object a = (Object) Integer.valueOf(1);
 
     }
@@ -23,6 +22,7 @@ public class VargClass {
         objects[0] = intList; // 힙 오염 발생
         String s = stringLists[0].get(0); // ClassCastException
         List<Integer> a = Arrays.asList(1, 2 , 3);
+
     }
 
 
@@ -30,6 +30,11 @@ public class VargClass {
         return args;
     }
 
+    static <T> List<T> toArray2(T one, T two) {
+        return  Arrays.asList(one, two);
+    }
+
+    //불가
     static <T> T[] pickTwo(T a, T b, T c) {
         switch(ThreadLocalRandom.current().nextInt(3)) {
             case 0: return toArray(a, b);
@@ -38,7 +43,13 @@ public class VargClass {
         }
         throw new AssertionError();
     }
+    //가능
+    static <T> T[] pickFour(T... args) {
+        return args;
+    }
 
+
+    //가능
     static <T> List<T> goodPickTwo(T a, T b, T c) {
         switch(ThreadLocalRandom.current().nextInt(3)) {
             case 0: return List.of(a, b);
@@ -47,6 +58,7 @@ public class VargClass {
         }
         throw new AssertionError();
     }
+
 
     @SafeVarargs
     static <T> List<T> flatten(List<? extends T>... lists) {

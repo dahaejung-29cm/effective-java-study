@@ -1,9 +1,6 @@
 package com.example.demo.generic;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.Delayed;
 import java.util.concurrent.ScheduledFuture;
 
@@ -11,12 +8,14 @@ public class RecursiveGenericTwo {
 
 
     public static void main(String[] args) {
-        List<ScheduledFuture<?>> scheduledFutures = new ArrayList<>();
+        List<ScheduledFuture<Number>> scheduledFutures = new ArrayList<>();
         // max(scheduledFutures); 에러
-        flexMax(scheduledFutures);
+        //flexMax(scheduledFutures);
+
 
         //varg("A", "B", "C");
-
+        List<Number> s = Arrays.asList(new Integer(2), new Double(2));
+        flexMax2(s);
     }
 
     //자기 자신으로 한정
@@ -45,6 +44,15 @@ public class RecursiveGenericTwo {
                 result = Objects.requireNonNull(e);
             }
         }
+        return result;
+    }
+
+    public static <E extends Number> E flexMax2(Collection<? extends E> c) {
+        if(c.isEmpty()) {
+            throw new IllegalArgumentException("empty collection");
+        }
+
+        E result = null;
         return result;
     }
 
