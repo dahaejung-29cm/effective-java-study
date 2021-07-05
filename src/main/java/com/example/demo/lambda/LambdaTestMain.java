@@ -1,5 +1,7 @@
 package com.example.demo.lambda;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.function.*;
 
 public class LambdaTestMain {
@@ -32,9 +34,38 @@ public class LambdaTestMain {
 
         BiFunction<Integer, Integer, Integer> plusTwo = (a, b) -> a + b;
         System.out.println(plusTwo.apply(10, 20)); // 30 출력
+
+        int changeNumber = 0;
+        List<Integer> test = List.of(1, 2 ,3, 5, 7);
+
+        test.stream()
+                .filter((number) -> {
+                    System.out.println("number: " + number);
+                    return number > 3;
+                });
+
+        Optional<Integer> result = test.stream()
+                .filter((number) -> {
+                    System.out.println("number: " + number);
+                    return number > 3;
+                })
+                .findFirst();
+
+        for (Integer a: test) {
+            changeNumber++;
+            System.out.println(a);
+        }
+        test.forEach(a-> {
+            System.out.println(a);
+        });
+
     }
 
     public static void carryOutWork(SimpleFunctionInterface sfi){
         sfi.doWork();
+    }
+
+    public static void error(Integer a) throws Exception{
+        System.out.println(String.valueOf(a));
     }
 }
